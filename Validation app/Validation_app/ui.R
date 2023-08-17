@@ -1,25 +1,29 @@
-library(shiny)
-library(readr)
-library(rmarkdown)
-
-ui <- shinyUI(fluidPage(
-  titlePanel("CSV File Analyzer"),
+ui <- fluidPage(
+  
+  # App title ----
+  titlePanel("Downloading Data"),
+  
+  # Sidebar layout with input and output definitions ----
   sidebarLayout(
+    
+    # Sidebar panel for inputs ----
     sidebarPanel(
-      fileInput("file", "Choose a CSV file:"),
-      downloadButton("downloadOutput", "Download Analysis Report (PDF)")
+      
+      # Input: Choose dataset ----
+      selectInput("dataset", "Choose a dataset:",
+                  choices = c("rock", "pressure", "cars")),
+      
+      # Button
+      downloadButton("downloadData", "Download")
+      
     ),
+    
+    # Main panel for displaying outputs ----
     mainPanel(
-      textOutput("alert"),
-      verbatimTextOutput("result"),
-      verbatimTextOutput("num_columns"),
-      tableOutput("missing_values_table"),
+      
+      tableOutput("table")
       
     )
+    
   )
-))
-
-
-
-
-
+)
